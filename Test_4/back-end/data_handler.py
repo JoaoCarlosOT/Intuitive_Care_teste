@@ -16,7 +16,11 @@ def load_data():
         df = pd.read_csv(file_path, delimiter=';')
         print(f"Dados lidos com sucesso: {df.head()}")  # Debug: Verificar dados lidos
         
-        return df.to_dict(orient='records')  # Converte o DataFrame para lista de dicionários
+        # Adiciona o campo 'id' com auto-increment
+        df['id'] = range(1, len(df) + 1)  # Cria a coluna 'id' com valores de 1 até o número total de registros
+
+        # Converte o DataFrame para uma lista de dicionários
+        return df.to_dict(orient='records')
 
     except Exception as e:
         print(f"Erro ao carregar o CSV: {e}")  # Mensagem de erro detalhada
