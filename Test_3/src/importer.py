@@ -9,7 +9,6 @@ def importar_csv_operadoras(csv_path):
     try:
         df = pd.read_csv(csv_path, sep=";", encoding="utf-8", dtype=str)
 
-        # Renomeando colunas para corresponder ao banco de dados
         df.rename(columns={
             "Registro_ANS": "registro_ans",
             "CNPJ": "cnpj",
@@ -33,7 +32,6 @@ def importar_csv_operadoras(csv_path):
             "Data_Registro_ANS": "data_registro_ans"
         }, inplace=True)
 
-        # Convertendo a data para o formato adequado
         df["data_registro_ans"] = pd.to_datetime(df["data_registro_ans"], errors="coerce")
 
         # Inserindo no banco de dados
@@ -49,7 +47,6 @@ def importar_csv_despesas(csv_path, trimestre, ano):
     try:
         df = pd.read_csv(csv_path, sep=";", encoding="utf-8", dtype=str)
 
-        # Renomeando colunas para corresponder ao banco
         df.rename(columns={
             "DATA": "data",
             "REG_ANS": "reg_ans",
@@ -59,12 +56,10 @@ def importar_csv_despesas(csv_path, trimestre, ano):
             "VL_SALDO_FINAL": "vl_saldo_final"
         }, inplace=True)
 
-        # Convertendo tipos
         df["data"] = pd.to_datetime(df["data"], errors="coerce")
         df["vl_saldo_inicial"] = pd.to_numeric(df["vl_saldo_inicial"], errors="coerce").fillna(0)
         df["vl_saldo_final"] = pd.to_numeric(df["vl_saldo_final"], errors="coerce").fillna(0)
 
-        # Adicionando colunas de trimestre e ano
         df["trimestre"] = trimestre
         df["ano"] = ano
 

@@ -5,8 +5,10 @@ from queries import top_10_despesas, top_10_despesas_ano
 
 def importar_arquivos_csv():
     base_dir = os.getcwd()  # Diretório base do projeto
-    operadoras_dir = os.path.join(base_dir, "uploads", "operadoras")
-    despesas_dir = os.path.join(base_dir, "uploads", "demonstracoes_contabeis")
+    parent_dir = os.path.dirname(base_dir)  
+    
+    operadoras_dir = os.path.join(parent_dir, "uploads", "operadoras")
+    despesas_dir = os.path.join(parent_dir, "uploads", "demonstracoes_contabeis")
 
     # Verificar se os diretórios existem
     if not os.path.exists(operadoras_dir):
@@ -22,15 +24,15 @@ def importar_arquivos_csv():
             file_path = os.path.join(operadoras_dir, file)
             importar_csv_operadoras(file_path)
 
-    # Importando despesas sem considerar o nome do arquivo
+    
     for file in os.listdir(despesas_dir):
         if file.endswith(".csv"):
             file_path = os.path.join(despesas_dir, file)
             print(f"Importando despesas de {file}")
-            importar_csv_despesas(file_path, trimestre="Desconhecido", ano=0)  # Removemos a dependência do nome do arquivo
+            importar_csv_despesas(file_path, trimestre="Desconhecido", ano=0)
 
 if __name__ == "__main__":
     criar_tabelas()
     importar_arquivos_csv()
-    top_10_despesas("4", 2024)  # Último trimestre
-    top_10_despesas_ano(2024)   # Último ano
+    top_10_despesas()  
+    top_10_despesas_ano(2024)  
