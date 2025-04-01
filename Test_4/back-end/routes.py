@@ -1,10 +1,8 @@
 from flask import Blueprint, jsonify
 from data_handler import load_data
 
-# Criando um Blueprint para as rotas
 bp = Blueprint('api', __name__)
 
-# Rota para retornar todos os dados do CSV
 @bp.route('/operadoras', methods=['GET'])
 def get_operadoras():
     # Carregar os dados
