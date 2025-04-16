@@ -1,5 +1,5 @@
 
-# TESTES DE NIVELAMENTO INTUITIVE CARE
+# TESTES python
 
 Este projeto é composto por quatro testes que envolvem as seguintes áreas:
 
